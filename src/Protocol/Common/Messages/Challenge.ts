@@ -1,6 +1,6 @@
 /// TODO : Rename to AuthenticationChallenge
-import { MessageBase } from "../../Abstracts/MessageBase";
-import { BufferHelper } from "../../BufferHelper";
+import { MessageBase } from "../../../Abstracts/MessageBase";
+import { BufferHelper } from "../../../BufferHelper";
 
 const size = 6;
 
@@ -22,7 +22,19 @@ export class AuthenticationChallenge extends MessageBase {
     }
 
     deserialize(buffer: Buffer): void {
-        throw new Error("Method not implemented.");
+        try {
+            let helper : BufferHelper = new BufferHelper(buffer);
+
+            let saltLength : number = helper.readUInt8();
+
+            this.validate(buffer, 1 + saltLength);
+
+            this.salt = helper.readString(saltLength);
+
+            this.valid = true;
+        } catch (e) {
+            this.valid = false;
+        }
     }
 
 }

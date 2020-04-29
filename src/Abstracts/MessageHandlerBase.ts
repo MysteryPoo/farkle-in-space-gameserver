@@ -1,14 +1,14 @@
 
 import { IMessageHandler } from "../Interfaces/IMessageHandler";
 import { IServer } from "../Interfaces/IServer";
-import { IClient } from "../Interfaces/IClient";
+import { ISocket } from "../Interfaces/ISocket";
 
 export abstract class MessageHandlerBase implements IMessageHandler {
 
-    constructor(readonly serverRef: IServer, readonly messageId: number) {
+    constructor(readonly messageId: number) {
 
     }
 
-    abstract handle(buffer: Buffer, myClient: IClient): boolean;
+    abstract handle(buffer: Buffer, myClient: ISocket): boolean;
     
 }
