@@ -10,6 +10,7 @@ export abstract class ClientBase implements IClient {
     public uid : string = uuid();
     public authenticated : boolean = false;
     public isConnected : boolean = false;
+    public lastConnectionError : Error = new Error();
 
     constructor(private socket : Socket, protected handlerList : IMessageHandler[], private connectionManager : IConnectionManager, connectionOptions? : SocketConnectOpts, onConnectCallback? : () => void) {
 
@@ -38,6 +39,7 @@ export abstract class ClientBase implements IClient {
         })
         .on('error', (err : Error) => {
             console.error(err);
+            this.lastConnectionError = err;
         })
         .on('close', (had_error) => {
             if (had_error) {

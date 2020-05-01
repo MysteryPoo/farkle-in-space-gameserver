@@ -2,9 +2,9 @@
 import { IMessageHandler } from "./Interfaces/IMessageHandler";
 import { ClientBase } from "./Abstracts/ClientBase";
 import { Socket, SocketConnectOpts } from "net";
-import { ChallengeHandler } from "./Protocol/Common/Handlers/Challenge";
-import { Ping } from "./Protocol/Common/Messages/Ping";
-import { PingHandler } from "./Protocol/Common/Handlers/Ping";
+import { ChallengeHandler } from "./Protocol/LobbyServerInterface/Handlers/Challenge";
+import { Ping } from "./Protocol/LobbyServerInterface/Messages/Ping";
+import { PingHandler } from "./Protocol/LobbyServerInterface/Handlers/Ping";
 import { IConnectionManager } from "./Interfaces/IConnectionManager";
 
 export enum MESSAGE_ID {
